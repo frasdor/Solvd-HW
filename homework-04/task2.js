@@ -13,13 +13,13 @@ class Product {
             value: price,
             writable: false,
             enumerable: false,
-            configurable: true
+            configurable: false
         });
         Object.defineProperty( this, 'quantity', {
                 value: quantity,
                 writable: false,
                 enumerable: false,
-                configurable: true
+                configurable: false
         });
     } 
     getTotalPrice(){
