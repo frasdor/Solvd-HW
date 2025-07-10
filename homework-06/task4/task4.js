@@ -13,7 +13,7 @@ function debouncedSearch(query) {
 	console.log("Searching for:", query);
 }
 
-const debouncedSearchHandler = debounce(debouncedSearch, 1000);
+const debouncedSearchHandler = debounce(debouncedSearch, 300);
 
 const inputElement = document.getElementById("search-input");
 inputElement.addEventListener("input", event => {
