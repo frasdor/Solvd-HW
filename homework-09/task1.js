@@ -38,3 +38,79 @@ class Queue {
         return this.items.length === 0;
     }
 }
+
+
+class BinaryTree {
+    constructor() {
+        this.root = null;
+    }
+    insert(value) {
+        const newNode = { value: value, left: null, right: null };
+
+        if (this.root === null) {
+            this.root = newNode;
+             return;
+        }
+
+        const insertNode =(node, newNode) => {
+           if (!node.left) {
+                node.left = newNode;
+            } else if (!node.right) {
+                node.right = newNode;
+            } else {
+                insertNode(node.left, newNode);
+            }
+        };
+        insertNode(this.root, newNode);
+    }
+
+    search(value) {
+        const searchNode = (node) => {
+            if (node === null) return null;
+            if (node.value === value) return node;
+
+            let found = searchNode(node.left);
+            if (found) return found;
+
+            return searchNode(node.right);
+        };
+
+        return searchNode(this.root);
+    }
+
+
+     traverseInOrder(callback) {
+        const inOrder = (node) => {
+            if (node !== null) {
+                inOrder(node.left);
+                callback(node.value);
+                inOrder(node.right);
+            }
+        };
+        inOrder(this.root);
+    }
+
+    traversePreOrder(callback) {
+        const preOrder = (node) => {
+            if (node !== null) {
+                callback(node.value);
+                preOrder(node.left);
+                preOrder(node.right);
+            }
+        };
+        preOrder(this.root);
+    }
+
+    traversePostOrder(callback) {
+        const postOrder = (node) => {
+            if (node !== null) {
+                postOrder(node.left);
+                postOrder(node.right);
+                callback(node.value);
+            }
+        };
+        postOrder(this.root);
+    }
+
+
+}
