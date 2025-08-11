@@ -111,6 +111,66 @@ class BinaryTree {
         };
         postOrder(this.root);
     }
+}
 
 
+class Graph {
+    constructor() {
+        this.adjacencyList = {}; 
+    }
+
+    addVertex(vertex) {
+        if (!this.adjacencyList[vertex]) {
+            this.adjacencyList[vertex] = [];
+        }
+    }
+
+    addEdge(vertex1, vertex2) {
+        if (!this.adjacencyList[vertex1]) this.addVertex(vertex1);
+        if (!this.adjacencyList[vertex2]) this.addVertex(vertex2);
+        this.adjacencyList[vertex1].push(vertex2);
+        this.adjacencyList[vertex2].push(vertex1);
+    }
+
+    DFS(start) {
+        const visited = {};
+        const result = [];
+
+        const dfsRecursive = (vertex) => {
+            if (!vertex) return;
+            visited[vertex] = true;
+            result.push(vertex);
+
+            this.adjacencyList[vertex].forEach(neighbor => {
+                if (!visited[neighbor]) {
+                    dfsRecursive(neighbor);
+                }
+            });
+        };
+
+        dfsRecursive(start);
+        return result;
+    }
+
+    BFS(start) {
+        const queue = [start];
+        const visited = {};
+        const result = [];
+
+        visited[start] = true;
+
+        while (queue.length) {
+            const vertex = queue.shift();
+            result.push(vertex);
+
+            this.adjacencyList[vertex].forEach(neighbor => {
+                if (!visited[neighbor]) {
+                    visited[neighbor] = true;
+                    queue.push(neighbor);
+                }
+            });
+        }
+
+        return result;
+    }
 }
