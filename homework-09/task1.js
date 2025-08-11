@@ -174,3 +174,59 @@ class Graph {
         return result;
     }
 }
+
+
+class LinkedList {
+    constructor() {
+        this.head = null;
+    }
+
+    createNode(value) {
+        return { value: value, next: null }
+    }
+
+
+    insert(value) {
+        const newNode = this.createNode(value);
+
+        if (!this.head) {
+            this.head = newNode;
+            return;
+        }
+
+        let current = this.head;
+        while (current.next) {
+            current = current.next;
+        }
+        current.next = newNode;
+    }
+
+     delete(value) {
+        if (!this.head) return;
+
+        if (this.head.value === value) {
+            this.head = this.head.next;
+            return;
+        }
+
+        let current = this.head;
+        while (current.next && current.next.value !== value) {
+            current = current.next;
+        }
+
+        if (current.next) {
+            current.next = current.next.next;
+        }
+    }
+
+    search(value) {
+        let current = this.head;
+        while (current) {
+            if (current.value === value) {
+                return current;
+            }
+            current = current.next;
+        }
+        return null; 
+    }
+}
