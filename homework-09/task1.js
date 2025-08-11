@@ -230,3 +230,59 @@ class LinkedList {
         return null; 
     }
 }
+
+
+class MinMaxStack {
+    constructor() {
+        this.stack = [];     // Main stack to store all values
+        this.minStack = [];  // Auxiliary stack to keep track of current minimums
+        this.maxStack = [];  // Auxiliary stack to keep track of current maximums
+    }
+
+    // Adds a value to the stack
+    push(value) {
+        this.stack.push(value);
+
+        // If minStack is empty or new value is smaller/equal to current min → push to minStack
+        if (this.minStack.length === 0 || value <= this.getMin()) {
+            this.minStack.push(value);
+        }
+
+        // If maxStack is empty or new value is larger/equal to current max → push to maxStack
+        if (this.maxStack.length === 0 || value >= this.getMax()) {
+            this.maxStack.push(value);
+        }
+    }
+
+    // Removes the top value from the stack
+    pop() {
+        if (this.stack.length === 0) return null; // Return null if stack is empty
+
+        const removed = this.stack.pop();
+
+        // If the removed value is the current min → pop from minStack as well
+        if (removed === this.getMin()) {
+            this.minStack.pop();
+        }
+
+        // If the removed value is the current max → pop from maxStack as well
+        if (removed === this.getMax()) {
+            this.maxStack.pop();
+        }
+
+        return removed; // Return the removed value
+    }
+
+    // Returns the current minimum value in O(1) time
+    getMin() {
+        if (this.minStack.length === 0) return null;
+        return this.minStack[this.minStack.length - 1];
+    }
+
+    // Returns the current maximum value in O(1) time
+    getMax() {
+        if (this.maxStack.length === 0) return null;
+        return this.maxStack[this.maxStack.length - 1];
+    }
+}
+
