@@ -1,9 +1,9 @@
 class Stack {
     constructor(){
-        this.item = [];
+        this.items = [];
     }
     push(element) {
-        this.item.push(element);
+        this.items.push(element);
     }
     pop() {
         if (this.isEmpty()) return null;
@@ -21,6 +21,20 @@ class Stack {
 
 class Queue {
     constructor(){
-
+        this.items =[];
+    }
+    enqueue(element) {
+        this.items.push(element);
+    }
+    dequeue() {
+        if (this.isEmpty()) return null;
+        return this.items.shift();
+    }
+    peek() {
+        if (this.isempty()) return null;
+        return this.items[0];
+    }
+    isEmpty() {
+        return this.items.length === 0;
     }
 }
