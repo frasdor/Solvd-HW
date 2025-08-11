@@ -286,3 +286,21 @@ class MinMaxStack {
     }
 }
 
+// Function to check if a binary tree is a valid Binary Search Tree (BST)
+function isBST(node, min = -Infinity, max = Infinity) {
+    // An empty tree (null node) is a valid BST
+    if (node === null) return true;
+
+    // The current node's value must be within the allowed range (min, max)
+    if (node.value <= min || node.value >= max) {
+        return false;
+    }
+
+    // Recursively check:
+    // 1. The left subtree → all values must be < current node's value
+    // 2. The right subtree → all values must be > current node's value
+    return (
+        isBST(node.left, min, node.value) &&
+        isBST(node.right, node.value, max)
+    );
+}
