@@ -304,3 +304,80 @@ function isBST(node, min = -Infinity, max = Infinity) {
         isBST(node.right, node.value, max)
     );
 }
+
+// BFS shortest path in an unweighted graph
+function bfsShortestPath(graph, start, target) {
+    // Queue for BFS: stores [vertex, pathTaken]
+    const queue = [[start, [start]]];
+    const visited = new Set(); // Track visited vertices
+
+    while (queue.length > 0) {
+        const [vertex, path] = queue.shift(); // Dequeue
+
+        if (vertex === target) {
+            return path; // Found the target → return path
+        }
+
+        visited.add(vertex);
+
+        // Go through all neighbors
+        for (let neighbor of graph[vertex]) {
+            if (!visited.has(neighbor)) {
+                queue.push([neighbor, [...path, neighbor]]);
+            }
+        }
+    }
+
+    return null; // No path found
+}
+
+// Dijkstra's algorithm for shortest path in a weighted graph
+function dijkstra(graph, start) {
+    const distances = {}; // Stores shortest known distance to each vertex
+    const previous = {};  // Stores previous vertex in shortest path
+    const visited = new Set();
+
+    // Initialize all distances as Infinity, except start vertex
+    for (let vertex in graph) {
+        distances[vertex] = Infinity;
+        previous[vertex] = null;
+    }
+    distances[start] = 0;
+
+    while (visited.size < Object.keys(graph).length) {
+        // Find the unvisited vertex with the smallest distance
+        let currentVertex = null;
+        for (let vertex in distances) {
+            if (!visited.has(vertex) && 
+               (currentVertex === null || distances[vertex] < distances[currentVertex])) {
+                currentVertex = vertex;
+            }
+        }
+
+        if (distances[currentVertex] === Infinity) break; // Unreachable vertices
+
+        visited.add(currentVertex);
+
+        // Update distances to neighbors
+        for (let neighbor in graph[currentVertex]) {
+            let newDistance = distances[currentVertex] + graph[currentVertex][neighbor];
+            if (newDistance < distances[neighbor]) {
+                distances[neighbor] = newDistance;
+                previous[neighbor] = currentVertex;
+            }
+        }
+    }
+
+    return { distances, previous };
+}
+
+// Helper to reconstruct shortest path after running Dijkstra
+function getShortestPath(previous, start, target) {
+    const path = [];
+    let current = target;
+    while (current !== null) {
+        path.unshift(current); // Add to front
+        current = previous[current];
+    }
+    return path[0] === start ? path : null;
+}
