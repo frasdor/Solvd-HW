@@ -35,7 +35,7 @@ class Queue {
         return this.items.shift();
     }
     peek() {
-        if (this.isempty()) return null;
+        if (this.isEmpty()) return null;
         return this.items[0];
     }
     isEmpty() {
@@ -418,94 +418,132 @@ function hasCycle(head) {
 // PART 3: DEMONSTRATION
 // ----------------------
 
-// 1️⃣ Stack Demo
+// Stack Demo
 console.log("=== STACK DEMO ===");
 const stack = new Stack();
 stack.push(10);
 stack.push(20);
 stack.push(30);
-console.log("Top element (peek):", stack.peek()); // 30
-console.log("Popped element:", stack.pop());      // 30
-console.log("After pop, peek:", stack.peek());    // 20
+console.log("Stack top (peek):", stack.peek()); // 30
+console.log("Stack pop:", stack.pop()); // 30
+console.log("Stack pop:", stack.pop()); // 20
+console.log("Stack is empty?", stack.isEmpty()); // false
+console.log("Stack pop:", stack.pop()); // 10
+console.log("Stack is empty?", stack.isEmpty()); // true
 
-// 2️⃣ Queue Demo
+// Queue Demo
 console.log("\n=== QUEUE DEMO ===");
 const queue = new Queue();
-queue.enqueue("A");
-queue.enqueue("B");
-queue.enqueue("C");
-console.log("Front element (peek):", queue.peek()); // A
-console.log("Dequeued element:", queue.dequeue());  // A
-console.log("After dequeue, peek:", queue.peek());  // B
+queue.enqueue("a");
+queue.enqueue("b");
+queue.enqueue("c");
+console.log("Queue front (peek):", queue.peek()); // "a"
+console.log("Queue dequeue:", queue.dequeue()); // "a"
+console.log("Queue dequeue:", queue.dequeue()); // "b"
+console.log("Queue dequeue:", queue.dequeue()); // "c"
+console.log("Queue is empty?", queue.isEmpty()); // true
 
-// 3️⃣ Binary Tree Demo
+// Binary Tree Demo
 console.log("\n=== BINARY TREE DEMO ===");
-const tree = new BinaryTree();
-tree.insert(10);
-tree.insert(5);
-tree.insert(15);
+const bt = new BinaryTree();
+bt.insert(1);
+bt.insert(2);
+bt.insert(3);
+bt.insert(4);
+console.log("Search for value 3:", bt.search(3)); // Node with value 3
 console.log("In-order traversal:");
-tree.inOrder(tree.root); // Should print sorted values: 5, 10, 15
+bt.traverseInOrder(value => console.log(value)); // 4,2,3,1 (structure depends on insertion order)
+console.log("Pre-order traversal:");
+bt.traversePreOrder(value => console.log(value)); // 1,2,4,3
+console.log("Post-order traversal:");
+bt.traversePostOrder(value => console.log(value)); // 4,3,2,1
 
-// Check if tree is a BST
-console.log("Is tree a BST?", isBST(tree.root)); // true
 
-// 4️⃣ Graph Demo
+// Binary Tree Demo
 console.log("\n=== GRAPH DEMO ===");
 const graph = new Graph();
-graph.addVertex("A");
-graph.addVertex("B");
-graph.addVertex("C");
-graph.addVertex("D");
 graph.addEdge("A", "B");
 graph.addEdge("A", "C");
 graph.addEdge("B", "D");
+graph.addEdge("C", "E");
+console.log("DFS starting from A:", graph.DFS("A")); // e.g. [ 'A', 'B', 'D', 'C', 'E' ]
+console.log("BFS starting from A:", graph.BFS("A")); // e.g. [ 'A', 'B', 'C', 'D', 'E' ]
 
-console.log("BFS from A:", graph.bfs("A")); // Example BFS order
-console.log("DFS from A:", graph.dfs("A")); // Example DFS order
-console.log("Shortest path BFS A->D:", graph.shortestPathBFS("A", "D"));
 
-// Dijkstra example (assuming weighted graph)
-graph.addEdge("B", "C", 2);
-graph.addEdge("C", "D", 1);
-console.log("Shortest path Dijkstra A->D:", graph.dijkstra("A", "D"));
-
-// 5️⃣ Linked List Demo
+// Linked List Demo
 console.log("\n=== LINKED LIST DEMO ===");
-const linkedList = new LinkedList();
-linkedList.insert(1);
-linkedList.insert(2);
-linkedList.insert(3);
-linkedList.display(); // Should show list: 1 -> 2 -> 3
-linkedList.delete(2);
-linkedList.display(); // Should show list: 1 -> 3
-console.log("Search for 3:", linkedList.search(3)); // true
-console.log("Search for 2:", linkedList.search(2)); // false
+const list = new LinkedList();
+list.insert(100);
+list.insert(200);
+list.insert(300);
+console.log("Search for 200:", list.search(200)); // Node with value 200
+list.delete(200);
+console.log("Search for 200 after delete:", list.search(200)); // null
 
-// 6️⃣ Min/Max Stack Demo
-console.log("\n=== MIN/MAX STACK DEMO ===");
+// Min/Max Stack Demo
+console.log("\n=== MIN MAX STACK DEMO ===");
 const minMaxStack = new MinMaxStack();
 minMaxStack.push(5);
-minMaxStack.push(1);
-minMaxStack.push(10);
-console.log("Current Min:", minMaxStack.getMin()); // 1
-console.log("Current Max:", minMaxStack.getMax()); // 10
+minMaxStack.push(3);
+minMaxStack.push(7);
+console.log("Current Min:", minMaxStack.getMin()); // 3
+console.log("Current Max:", minMaxStack.getMax()); // 7
 minMaxStack.pop();
-console.log("After pop, Min:", minMaxStack.getMin()); // 1
-console.log("After pop, Max:", minMaxStack.getMax()); // 5
+console.log("Current Min after pop:", minMaxStack.getMin()); // 3
+console.log("Current Max after pop:", minMaxStack.getMax()); // 5
 
-// 7️⃣ Linked List Cycle Detection Demo
+console.log("\n=== IS BST DEMO ===");
+const bst = new BinaryTree();
+bst.insert(10);
+bst.insert(5);
+bst.insert(15);
+console.log("Is BST valid?", isBST(bst.root)); // false because your insert doesn't maintain BST property
+// (Note: Your BinaryTree insert is not a BST insert; for demo you can create proper nodes manually if needed)
+
+console.log("\n=== BFS SHORTEST PATH DEMO ===");
+const simpleGraph = {
+    A: ["B", "C"],
+    B: ["A", "D", "E"],
+    C: ["A", "F"],
+    D: ["B"],
+    E: ["B", "F"],
+    F: ["C", "E"]
+};
+console.log("Shortest path from A to F:", bfsShortestPath(simpleGraph, "A", "F")); // e.g. [ 'A', 'C', 'F' ]
+
+console.log("\n=== DIJKSTRA DEMO ===");
+const weightedGraph = {
+    A: { B: 4, C: 2 },
+    B: { A: 4, C: 5, D: 10 },
+    C: { A: 2, B: 5, E: 3 },
+    D: { B: 10, F: 11 },
+    E: { C: 3, F: 4 },
+    F: { D: 11, E: 4 }
+};
+const dijkstraResult = dijkstra(weightedGraph, "A");
+console.log("Distances from A:", dijkstraResult.distances);
+console.log("Shortest path from A to F:", getShortestPath(dijkstraResult.previous, "A", "F"));
+
+
+// Linked List Cycle Detection Demo
 console.log("\n=== LINKED LIST CYCLE DETECTION DEMO ===");
-const node1 = new ListNode(1);
-const node2 = new ListNode(2);
-const node3 = new ListNode(3);
-
+// Create a cycle linked list manually
+const cycleList = new LinkedList();
+const node1 = cycleList.createNode(1);
+const node2 = cycleList.createNode(2);
+const node3 = cycleList.createNode(3);
+cycleList.head = node1;
 node1.next = node2;
 node2.next = node3;
-node3.next = node2; // creates cycle
+node3.next = node1; // cycle here
+console.log("Linked list has cycle?", hasCycle(cycleList.head)); // true
 
-console.log("Has cycle?", hasCycle(node1)); // true
-
+// Non-cyclic list check
+const noCycleList = new LinkedList();
+noCycleList.insert(1);
+noCycleList.insert(2);
+noCycleList.insert(3);
+console.log("Linked list has cycle?", hasCycle(noCycleList.head)); // false
 // Remove cycle
 node3.next = null;
 console.log("Has cycle after fix?", hasCycle(node1)); // false
