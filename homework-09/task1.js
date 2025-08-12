@@ -1,3 +1,7 @@
+// ----------------------
+// PART 1: Data Structure Implementations
+// ----------------------
+
 class Stack {
     constructor(){
         this.items = [];
@@ -232,6 +236,10 @@ class LinkedList {
 }
 
 
+// ----------------------
+// PART 2: Algorithmic Problems
+// ----------------------
+
 class MinMaxStack {
     constructor() {
         this.stack = [];     // Main stack to store all values
@@ -404,3 +412,100 @@ function hasCycle(head) {
     // If slow == fast → they met inside a cycle
     return true;
 }
+
+
+// ----------------------
+// PART 3: DEMONSTRATION
+// ----------------------
+
+// 1️⃣ Stack Demo
+console.log("=== STACK DEMO ===");
+const stack = new Stack();
+stack.push(10);
+stack.push(20);
+stack.push(30);
+console.log("Top element (peek):", stack.peek()); // 30
+console.log("Popped element:", stack.pop());      // 30
+console.log("After pop, peek:", stack.peek());    // 20
+
+// 2️⃣ Queue Demo
+console.log("\n=== QUEUE DEMO ===");
+const queue = new Queue();
+queue.enqueue("A");
+queue.enqueue("B");
+queue.enqueue("C");
+console.log("Front element (peek):", queue.peek()); // A
+console.log("Dequeued element:", queue.dequeue());  // A
+console.log("After dequeue, peek:", queue.peek());  // B
+
+// 3️⃣ Binary Tree Demo
+console.log("\n=== BINARY TREE DEMO ===");
+const tree = new BinaryTree();
+tree.insert(10);
+tree.insert(5);
+tree.insert(15);
+console.log("In-order traversal:");
+tree.inOrder(tree.root); // Should print sorted values: 5, 10, 15
+
+// Check if tree is a BST
+console.log("Is tree a BST?", isBST(tree.root)); // true
+
+// 4️⃣ Graph Demo
+console.log("\n=== GRAPH DEMO ===");
+const graph = new Graph();
+graph.addVertex("A");
+graph.addVertex("B");
+graph.addVertex("C");
+graph.addVertex("D");
+graph.addEdge("A", "B");
+graph.addEdge("A", "C");
+graph.addEdge("B", "D");
+
+console.log("BFS from A:", graph.bfs("A")); // Example BFS order
+console.log("DFS from A:", graph.dfs("A")); // Example DFS order
+console.log("Shortest path BFS A->D:", graph.shortestPathBFS("A", "D"));
+
+// Dijkstra example (assuming weighted graph)
+graph.addEdge("B", "C", 2);
+graph.addEdge("C", "D", 1);
+console.log("Shortest path Dijkstra A->D:", graph.dijkstra("A", "D"));
+
+// 5️⃣ Linked List Demo
+console.log("\n=== LINKED LIST DEMO ===");
+const linkedList = new LinkedList();
+linkedList.insert(1);
+linkedList.insert(2);
+linkedList.insert(3);
+linkedList.display(); // Should show list: 1 -> 2 -> 3
+linkedList.delete(2);
+linkedList.display(); // Should show list: 1 -> 3
+console.log("Search for 3:", linkedList.search(3)); // true
+console.log("Search for 2:", linkedList.search(2)); // false
+
+// 6️⃣ Min/Max Stack Demo
+console.log("\n=== MIN/MAX STACK DEMO ===");
+const minMaxStack = new MinMaxStack();
+minMaxStack.push(5);
+minMaxStack.push(1);
+minMaxStack.push(10);
+console.log("Current Min:", minMaxStack.getMin()); // 1
+console.log("Current Max:", minMaxStack.getMax()); // 10
+minMaxStack.pop();
+console.log("After pop, Min:", minMaxStack.getMin()); // 1
+console.log("After pop, Max:", minMaxStack.getMax()); // 5
+
+// 7️⃣ Linked List Cycle Detection Demo
+console.log("\n=== LINKED LIST CYCLE DETECTION DEMO ===");
+const node1 = new ListNode(1);
+const node2 = new ListNode(2);
+const node3 = new ListNode(3);
+
+node1.next = node2;
+node2.next = node3;
+node3.next = node2; // creates cycle
+
+console.log("Has cycle?", hasCycle(node1)); // true
+
+// Remove cycle
+node3.next = null;
+console.log("Has cycle after fix?", hasCycle(node1)); // false
