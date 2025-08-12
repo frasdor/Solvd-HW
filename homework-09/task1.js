@@ -2,52 +2,93 @@
 // PART 1: Data Structure Implementations
 // ----------------------
 
+/**
+ * Stack class implements LIFO (Last In First Out) stack.
+ */
 class Stack {
     constructor(){
         this.items = [];
     }
+    /**
+     * Adds element to the top of the stack.
+     */
     push(element) {
         this.items.push(element);
     }
+    /**
+     * Removes and returns the top element from the stack.
+     * Returns null if stack is empty.
+     */
     pop() {
         if (this.isEmpty()) return null;
         return this.items.pop();
     }
+    /**
+     * Returns the top element without removing it.
+     * Returns null if stack is empty.
+     */
     peek() {
         if(this.isEmpty()) return null;
         return this.items[this.items.length - 1];
     }
+    /**
+     * Returns true if the stack is empty, false otherwise.
+     */
     isEmpty() {
         return this.items.length === 0;
     }
 }
 
-
+/**
+ * Queue class implements FIFO (First In First Out) queue.
+ */
 class Queue {
     constructor(){
         this.items =[];
     }
+    /**
+     * Adds element to the back of the queue.
+     */
     enqueue(element) {
         this.items.push(element);
     }
+    /**
+     * Removes and returns the front element from the queue.
+     * Returns null if queue is empty.
+     */
     dequeue() {
         if (this.isEmpty()) return null;
         return this.items.shift();
     }
+    /**
+     * Returns the front element without removing it.
+     * Returns null if queue is empty.
+     */
     peek() {
         if (this.isEmpty()) return null;
         return this.items[0];
     }
+    /**
+     * Returns true if the queue is empty, false otherwise.
+     */
     isEmpty() {
         return this.items.length === 0;
     }
 }
 
-
+/**
+ * BinaryTree class with basic insert, search, and traversal methods.
+ * Note: Insert does not maintain Binary Search Tree property.
+ */
 class BinaryTree {
     constructor() {
         this.root = null;
     }
+
+     /**
+     * Inserts a new value into the tree.
+     * Does not maintain BST property, inserts left to right.
+     */
     insert(value) {
         const newNode = { value: value, left: null, right: null };
 
@@ -68,6 +109,10 @@ class BinaryTree {
         insertNode(this.root, newNode);
     }
 
+    /**
+     * Searches for a node with the given value.
+     * Returns the node if found, null otherwise.
+     */
     search(value) {
         const searchNode = (node) => {
             if (node === null) return null;
@@ -82,7 +127,10 @@ class BinaryTree {
         return searchNode(this.root);
     }
 
-
+    /**
+     * In-order traversal: left -> root -> right.
+     * Calls callback on each node’s value.
+     */
      traverseInOrder(callback) {
         const inOrder = (node) => {
             if (node !== null) {
@@ -94,6 +142,10 @@ class BinaryTree {
         inOrder(this.root);
     }
 
+     /**
+     * Pre-order traversal: root -> left -> right.
+     * Calls callback on each node’s value.
+     */
     traversePreOrder(callback) {
         const preOrder = (node) => {
             if (node !== null) {
@@ -105,6 +157,10 @@ class BinaryTree {
         preOrder(this.root);
     }
 
+    /**
+     * Post-order traversal: left -> right -> root.
+     * Calls callback on each node’s value.
+     */
     traversePostOrder(callback) {
         const postOrder = (node) => {
             if (node !== null) {
@@ -117,18 +173,29 @@ class BinaryTree {
     }
 }
 
-
+/**
+ * Graph class implemented with adjacency list.
+ * Supports adding vertices, edges, and traversals (DFS and BFS).
+ */
 class Graph {
     constructor() {
         this.adjacencyList = {}; 
     }
 
+    /**
+     * Adds a vertex to the graph.
+     * If vertex already exists, does nothing.
+     */
     addVertex(vertex) {
         if (!this.adjacencyList[vertex]) {
             this.adjacencyList[vertex] = [];
         }
     }
 
+    /**
+     * Adds an undirected edge between vertex1 and vertex2.
+     * Automatically adds vertices if they don't exist.
+     */
     addEdge(vertex1, vertex2) {
         if (!this.adjacencyList[vertex1]) this.addVertex(vertex1);
         if (!this.adjacencyList[vertex2]) this.addVertex(vertex2);
@@ -136,6 +203,10 @@ class Graph {
         this.adjacencyList[vertex2].push(vertex1);
     }
 
+     /**
+     * Depth-First Search traversal from start vertex.
+     * Returns an array of visited vertices in DFS order.
+     */
     DFS(start) {
         const visited = {};
         const result = [];
@@ -156,6 +227,10 @@ class Graph {
         return result;
     }
 
+    /**
+     * Breadth-First Search traversal from start vertex.
+     * Returns an array of visited vertices in BFS order.
+     */
     BFS(start) {
         const queue = [start];
         const visited = {};
@@ -179,17 +254,25 @@ class Graph {
     }
 }
 
-
+/**
+ * LinkedList class with basic insert, delete, and search operations.
+ */
 class LinkedList {
     constructor() {
         this.head = null;
     }
 
+      /**
+     * Creates a new node object.
+     */
     createNode(value) {
         return { value: value, next: null }
     }
 
 
+    /**
+     * Inserts a new value at the end of the linked list.
+     */
     insert(value) {
         const newNode = this.createNode(value);
 
@@ -205,6 +288,9 @@ class LinkedList {
         current.next = newNode;
     }
 
+    /**
+     * Deletes the first node with the specified value.
+     */
      delete(value) {
         if (!this.head) return;
 
@@ -223,6 +309,10 @@ class LinkedList {
         }
     }
 
+    /**
+     * Searches for a node by value.
+     * Returns the node if found, null otherwise.
+     */
     search(value) {
         let current = this.head;
         while (current) {
@@ -240,95 +330,106 @@ class LinkedList {
 // PART 2: Algorithmic Problems
 // ----------------------
 
+/**
+ * MinMaxStack class extends stack functionality to get min and max in O(1).
+ */
 class MinMaxStack {
     constructor() {
-        this.stack = [];     // Main stack to store all values
-        this.minStack = [];  // Auxiliary stack to keep track of current minimums
-        this.maxStack = [];  // Auxiliary stack to keep track of current maximums
+        this.stack = [];     
+        this.minStack = [];  
+        this.maxStack = [];  
     }
 
-    // Adds a value to the stack
+    /**
+     * Pushes a value onto the stack.
+     * Updates minStack and maxStack accordingly.
+     */
     push(value) {
         this.stack.push(value);
 
-        // If minStack is empty or new value is smaller/equal to current min → push to minStack
         if (this.minStack.length === 0 || value <= this.getMin()) {
             this.minStack.push(value);
         }
 
-        // If maxStack is empty or new value is larger/equal to current max → push to maxStack
         if (this.maxStack.length === 0 || value >= this.getMax()) {
             this.maxStack.push(value);
         }
     }
 
-    // Removes the top value from the stack
+    /**
+     * Pops the top value off the stack.
+     * Updates minStack and maxStack if needed.
+     * Returns popped value or null if empty.
+     */
     pop() {
-        if (this.stack.length === 0) return null; // Return null if stack is empty
+        if (this.stack.length === 0) return null; 
 
         const removed = this.stack.pop();
 
-        // If the removed value is the current min → pop from minStack as well
         if (removed === this.getMin()) {
             this.minStack.pop();
         }
 
-        // If the removed value is the current max → pop from maxStack as well
         if (removed === this.getMax()) {
             this.maxStack.pop();
         }
 
-        return removed; // Return the removed value
+        return removed; 
     }
 
-    // Returns the current minimum value in O(1) time
+      /**
+     * Returns current minimum value in O(1).
+     * Returns null if stack is empty.
+     */
     getMin() {
         if (this.minStack.length === 0) return null;
         return this.minStack[this.minStack.length - 1];
     }
 
-    // Returns the current maximum value in O(1) time
+    /**
+     * Returns current maximum value in O(1).
+     * Returns null if stack is empty.
+     */
     getMax() {
         if (this.maxStack.length === 0) return null;
         return this.maxStack[this.maxStack.length - 1];
     }
 }
 
-// Function to check if a binary tree is a valid Binary Search Tree (BST)
+/**
+ * Checks if a binary tree is a valid Binary Search Tree (BST).
+ * Returns true if valid BST, false otherwise.
+ */
 function isBST(node, min = -Infinity, max = Infinity) {
-    // An empty tree (null node) is a valid BST
     if (node === null) return true;
 
-    // The current node's value must be within the allowed range (min, max)
     if (node.value <= min || node.value >= max) {
         return false;
     }
 
-    // Recursively check:
-    // 1. The left subtree → all values must be < current node's value
-    // 2. The right subtree → all values must be > current node's value
     return (
         isBST(node.left, min, node.value) &&
         isBST(node.right, node.value, max)
     );
 }
 
-// BFS shortest path in an unweighted graph
+/**
+ * Finds shortest path in an unweighted graph using BFS.
+ * Returns array of vertices in path from start to target.
+ * Returns null if no path exists.
+ */
 function bfsShortestPath(graph, start, target) {
-    // Queue for BFS: stores [vertex, pathTaken]
     const queue = [[start, [start]]];
-    const visited = new Set(); // Track visited vertices
+    const visited = new Set(); 
 
     while (queue.length > 0) {
-        const [vertex, path] = queue.shift(); // Dequeue
-
+        const [vertex, path] = queue.shift(); 
         if (vertex === target) {
-            return path; // Found the target → return path
+            return path; 
         }
 
         visited.add(vertex);
 
-        // Go through all neighbors
         for (let neighbor of graph[vertex]) {
             if (!visited.has(neighbor)) {
                 queue.push([neighbor, [...path, neighbor]]);
@@ -339,13 +440,15 @@ function bfsShortestPath(graph, start, target) {
     return null; // No path found
 }
 
-// Dijkstra's algorithm for shortest path in a weighted graph
+/**
+ * Dijkstra's algorithm for shortest paths in weighted graphs.
+ * Returns an object with distances and previous vertex info.
+ */
 function dijkstra(graph, start) {
-    const distances = {}; // Stores shortest known distance to each vertex
-    const previous = {};  // Stores previous vertex in shortest path
+    const distances = {}; 
+    const previous = {};  
     const visited = new Set();
 
-    // Initialize all distances as Infinity, except start vertex
     for (let vertex in graph) {
         distances[vertex] = Infinity;
         previous[vertex] = null;
@@ -353,7 +456,6 @@ function dijkstra(graph, start) {
     distances[start] = 0;
 
     while (visited.size < Object.keys(graph).length) {
-        // Find the unvisited vertex with the smallest distance
         let currentVertex = null;
         for (let vertex in distances) {
             if (!visited.has(vertex) && 
@@ -362,11 +464,10 @@ function dijkstra(graph, start) {
             }
         }
 
-        if (distances[currentVertex] === Infinity) break; // Unreachable vertices
+        if (distances[currentVertex] === Infinity) break; 
 
         visited.add(currentVertex);
 
-        // Update distances to neighbors
         for (let neighbor in graph[currentVertex]) {
             let newDistance = distances[currentVertex] + graph[currentVertex][neighbor];
             if (newDistance < distances[neighbor]) {
@@ -379,37 +480,39 @@ function dijkstra(graph, start) {
     return { distances, previous };
 }
 
-// Helper to reconstruct shortest path after running Dijkstra
+/**
+ * Reconstructs shortest path from 'previous' info after Dijkstra.
+ * Returns array of vertices from start to target or null if no path.
+ */
 function getShortestPath(previous, start, target) {
     const path = [];
     let current = target;
     while (current !== null) {
-        path.unshift(current); // Add to front
+        path.unshift(current); 
         current = previous[current];
     }
     return path[0] === start ? path : null;
 }
 
 
-// Function to detect if a linked list contains a cycle
-// Uses Floyd's Tortoise and Hare algorithm
+/**
+ * Detects if a linked list contains a cycle.
+ * Uses Floyd's Tortoise and Hare algorithm.
+ * Returns true if cycle detected, false otherwise.
+ */
 function hasCycle(head) {
-    // If the list is empty or has only one node → no cycle
     if (!head || !head.next) return false;
 
-    let slow = head;       // Moves one step at a time (Tortoise)
-    let fast = head.next;  // Moves two steps at a time (Hare)
+    let slow = head;       
+    let fast = head.next;  
 
-    // Loop until the fast pointer reaches the end
     while (slow !== fast) {
-        // If fast reaches null → no cycle
         if (!fast || !fast.next) return false;
 
-        slow = slow.next;         // Move tortoise by 1 step
-        fast = fast.next.next;    // Move hare by 2 steps
+        slow = slow.next;         
+        fast = fast.next.next;    
     }
 
-    // If slow == fast → they met inside a cycle
     return true;
 }
 
@@ -497,8 +600,7 @@ const bst = new BinaryTree();
 bst.insert(10);
 bst.insert(5);
 bst.insert(15);
-console.log("Is BST valid?", isBST(bst.root)); // false because your insert doesn't maintain BST property
-// (Note: Your BinaryTree insert is not a BST insert; for demo you can create proper nodes manually if needed)
+console.log("Is BST valid?", isBST(bst.root)); 
 
 console.log("\n=== BFS SHORTEST PATH DEMO ===");
 const simpleGraph = {
