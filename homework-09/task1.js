@@ -381,3 +381,26 @@ function getShortestPath(previous, start, target) {
     }
     return path[0] === start ? path : null;
 }
+
+
+// Function to detect if a linked list contains a cycle
+// Uses Floyd's Tortoise and Hare algorithm
+function hasCycle(head) {
+    // If the list is empty or has only one node → no cycle
+    if (!head || !head.next) return false;
+
+    let slow = head;       // Moves one step at a time (Tortoise)
+    let fast = head.next;  // Moves two steps at a time (Hare)
+
+    // Loop until the fast pointer reaches the end
+    while (slow !== fast) {
+        // If fast reaches null → no cycle
+        if (!fast || !fast.next) return false;
+
+        slow = slow.next;         // Move tortoise by 1 step
+        fast = fast.next.next;    // Move hare by 2 steps
+    }
+
+    // If slow == fast → they met inside a cycle
+    return true;
+}
