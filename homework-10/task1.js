@@ -70,3 +70,26 @@ class CustomHashTable {
     return false;
   }
 }
+
+// ------------------------------
+// Test collision handling
+// ------------------------------
+
+
+const hashTable = new CustomHashTable(5);
+
+hashTable.insert("cat", "animal");
+hashTable.insert("tac", "reversed"); 
+hashTable.insert("dog", "animal");
+hashTable.insert("god", "reversed"); 
+hashTable.insert("car", "vehicle");
+
+console.log(hashTable.get("cat")); 
+console.log(hashTable.get("tac")); 
+console.log(hashTable.get("dog")); 
+console.log(hashTable.get("god")); 
+
+hashTable.delete("tac");
+console.log(hashTable.get("tac")); 
+
+console.log(hashTable.table)
