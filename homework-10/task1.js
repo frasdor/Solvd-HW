@@ -137,3 +137,25 @@ console.log(hashTable.get("tac")); // undefined
 
 // Display full table
 console.log(hashTable.table)
+
+
+// ------------------------------
+// Analysis
+// ------------------------------
+/**
+ * Performance Analysis:
+ * 
+ * Hash Function:
+ * - Time complexity: O(n), where n = length of key
+ * - Simple multiplication & addition algorithm, uniformly distributes small strings
+ * 
+ * Hash Table Operations (using separate chaining):
+ * - insert: Average O(1), Worst O(k) if all elements collide in one bucket
+ * - get: Average O(1), Worst O(k)
+ * - delete: Average O(1), Worst O(k)
+ * 
+ * Trade-offs:
+ * - Using separate chaining simplifies collision handling and allows multiple items per bucket
+ * - Requires extra memory for arrays in each bucket
+ * - Choosing a small table size increases chance of collisions, decreasing performance
+ */
