@@ -320,7 +320,7 @@ console.log("Result:", result); // Expected: 24
 Extend your currying function to allow partial application. Implement a special symbol (e.g., `_`) that represents a placeholder for missing arguments. The curried function should be able to accept arguments in any order, while placeholders are used for missing arguments.
 
 
-Homework 7
+# Homework 7
 Task 1: Implement promiseAll Function
 Your task is to implement a function called promiseAll that mimics the behavior of Promise.all(). The function should accept an array of promises and return a single promise that resolves to an array of resolved values or rejects with the reason of the first rejected promise.
 Instructions
@@ -421,3 +421,112 @@ promisedFunction(3)
   .catch(error => {
     console.error("Promised function error:", error);
   });
+
+
+ # Homework 9
+Task
+Demonstrate your knowledge of data structures (stack, queue, tree, graph, linked list) and implement algorithms to solve specific problems related to these data structures in JavaScript.
+Part 1: Data Structure Implementations
+Stack: Implement a class for a stack data structure. Include methods for push, pop, and peek.
+Queue: Implement a class for a queue data structure. Include methods for enqueue, dequeue, and peek.
+Binary Tree: Implement a class for a binary tree data structure. Include methods for inserting nodes, searching for a node, and traversing the tree (e.g., in-order, pre-order, post-order).
+Graph: Implement a class for a graph data structure. Include methods for adding vertices and edges, performing depth-first search (DFS), and breadth-first search (BFS).
+Linked List: Implement a class for a singly linked list data structure. Include methods for inserting nodes, deleting nodes, and searching for a node.
+Part 2: Algorithmic Problems
+Min/Max Stack: Implement a class for a stack that supports finding the minimum and maximum elements in constant time (O(1)). Include methods for push, pop, getMin, and getMax.
+Binary Search Tree: Implement a function to determine if a binary tree is a binary search tree (BST). Provide an efficient algorithm that checks whether the tree satisfies the BST property.
+Graph Algorithms: Implement algorithms to find the shortest path between two vertices in a graph using both Dijkstra's algorithm and Breadth-First Search (BFS).
+Linked List Cycle: Implement a function to detect if a linked list has a cycle. Use Floyd's Cycle Detection Algorithm (Tortoise and Hare algorithm) to solve this problem efficiently.
+Part 3: Demonstration
+Usage Demonstration: Create instances of your data structures and demonstrate their usage with sample data. Show how the algorithms you implemented can solve practical problems using these data structures.
+Part 4: Documentation
+Documentation: Provide clear and concise comments and documentation for your code. Explain the purpose of each data structure, method, and algorithm. Describe how the algorithms work and their time complexity.
+Submission
+Submit your JavaScript code along with detailed documentation and comments that explain your data structure implementations and algorithms. Ensure that your code is well-structured and adheres to best practices in data structures and algorithms.
+Example
+Here's a simplified example structure to give you an idea of what your code might look like:
+class Stack {
+  // Implement methods for push, pop, peek...
+}
+
+class Queue {
+  // Implement methods for enqueue, dequeue, peek...
+}
+
+class BinaryTree {
+  // Implement methods for inserting nodes, searching, traversing...
+}
+
+class Graph {
+  // Implement methods for adding vertices, edges, DFS, BFS...
+}
+
+class LinkedList {
+  // Implement methods for inserting, deleting, searching...
+}
+
+// Implement Min/Max Stack, Binary Search Tree, Graph Algorithms...
+// Demonstrate usage and provide documentation...
+
+# Homework 10
+
+### Task
+
+Explore the concepts of hash functions and hash tables, and to implement a hash table with a custom hash function in JavaScript. This assignment will test your understanding of hash functions, collision resolution, and the practical application of hash tables.
+
+### **Part 1: Understanding Hash Functions**
+
+1. **Research**: Begin by researching and understanding what hash functions are, how they work, and their applications in computer science and data storage.
+
+### **Part 2: Implementing a Custom Hash Function**
+
+1. **Custom Hash Function**: Implement a custom hash function in JavaScript. Your hash function should take a string as input and produce a hash code (an integer) as output. Be creative, but ensure that your function distributes values uniformly.
+2. **Collision Handling**: Implement a collision resolution strategy. You can choose from methods like separate chaining (using linked lists), open addressing (linear probing, quadratic probing), or any other technique you prefer.
+
+### **Part 3: Building a Hash Table**
+
+1. **Hash Table Class**: Create a JavaScript class for a hash table that uses your custom hash function. Include methods for inserting key-value pairs, retrieving values by key, and deleting key-value pairs.
+2. **Testing**: Create test cases to ensure that your hash table and custom hash function work correctly. Test scenarios should include inserting, retrieving, and deleting values, as well as handling collisions gracefully.
+
+### **Part 4: Documentation and Analysis**
+
+1. **Documentation**: Provide clear and concise comments and documentation for your code. Explain how your custom hash function and hash table class work.
+2. **Analysis**: Write a brief analysis of the performance of your custom hash function and hash table. Discuss the time complexity of key operations (insertion, retrieval, deletion) and any trade-offs you made in your implementation.
+
+### **Submission**
+
+Submit your JavaScript code for the custom hash function and hash table along with your documentation and analysis. Include test cases that demonstrate the correctness and efficiency of your implementation.
+
+### **Example**
+
+Here's a simplified example structure to give you an idea of what your code might look like:
+
+```jsx
+class CustomHashTable {
+  constructor() {
+    // Initialize the hash table...
+  }
+
+  hash(key) {
+    // Implement your custom hash function...
+  }
+
+  insert(key, value) {
+    // Implement key-value insertion...
+  }
+
+  get(key) {
+    // Implement key retrieval...
+  }
+
+  delete(key) {
+    // Implement key deletion...
+  }
+}
+
+// Create an instance of CustomHashTable and demonstrate its usage...
+```
+
+### **Bonus Challenge**
+
+For an extra challenge, consider implementing additional features for your hash table, such as resizing the table dynamically to maintain an efficient load factor, or implementing a method to iterate through all key-value pairs in the hash table.
